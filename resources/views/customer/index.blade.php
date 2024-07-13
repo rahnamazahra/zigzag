@@ -16,9 +16,9 @@
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Brand</th>
-                            <th>Status</th>
+                            <th>{{__("id")}}</th>
+                            <th>{{__("name")}}</th>
+                            <th>{{__("mobile")}}</th>
                         </tr>
                         </thead>
                         <tbody>

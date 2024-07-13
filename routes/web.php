@@ -2,11 +2,20 @@
 
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProfileController;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('lang/{locale}', function ($locale) {
+    if (!in_array($locale, ['en', 'fa'])) {
+        abort(400);
+    }
+    App::setLocale($locale);
+    return redirect()->back();
+})->name('setLocale');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
