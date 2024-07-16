@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LocalSetController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SizeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,6 +19,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/customers', CustomerController::class);
     Route::resource('/orders', OrderController::class)->except('create');
     Route::get('/orders/customers/{customer}', [OrderController::class, 'create'])->name('orders.create');
+    Route::resource('/sizes', SizeController::class)->except('create');
+    Route::get('/sizes/orders/{order}', [SizeController::class, 'create'])->name('sizes.create');
+
 });
 
 Route::middleware('auth')->group(function () {

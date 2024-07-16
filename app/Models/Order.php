@@ -26,4 +26,14 @@ class Order extends Model
     {
         return $this->belongsTo(User::class, 'tailor_id');
     }
+
+    public function clothingType(): BelongsTo
+    {
+        return $this->belongsTo(Cloth::class, 'cloth_id');
+    }
+
+    public function size(): BelongsTo
+    {
+        return $this->belongsTo(Size::class);
+    }
 }

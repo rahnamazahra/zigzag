@@ -7,6 +7,7 @@ use App\Http\Requests\order\UpdateOrderRequest;
 use App\Models\Category;
 use App\Models\Cloth;
 use App\Models\Order;
+use App\Models\Size;
 use App\Models\User;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -27,7 +28,7 @@ class OrderController extends Controller
     {
         $validated = $request->validated();
 
-        Order::query()->create([
+        $order = Order::query()->create([
             'tailor_id'   => Auth::id(),
             'customer_id' => $validated['customer_id'],
             'cloth_id'    => $validated['cloth_id'],
@@ -36,7 +37,7 @@ class OrderController extends Controller
             'price'       => $validated['price'],
         ]);
 
-        return redirect()->route('orders.index');
+        return redirect()->route('sizes.create', ['order' => $order->id]);
     }
 
     public function create(User $customer): Factory|View|Application
@@ -47,10 +48,10 @@ class OrderController extends Controller
         return view('order.create', compact('customer', 'clothes', 'categories'));
     }
 
-    public function show(Order $order)
+    public function show(Order $order): Factory|View|Application
     {
-        //        $orders = $user->orders()->orderBy('id', 'desc')->paginate(20);
-        //        return view('order.index', compact('orders'));
+        $sizes = Size::where('order_id', $order->id)->get();
+        return view('order.show', compact('sizes', 'order'));
     }
 
     public function edit(User $user): Factory|View|Application
@@ -70,10 +71,10 @@ class OrderController extends Controller
         return redirect()->route('orders.index');
     }
 
-    public function destroy(User $user): RedirectResponse
+    public function destroy(Order $order): RedirectResponse
     {
-        $user->delete();
+        $order->delete();
 
-        return redirect()->route('orders.index');
+        return redirect()->back();
     }
 }

@@ -34,4 +34,7 @@ return [
     'Detail'                => 'جزییات',
     'Customers Count'       => 'تعداد مشتریان',
     'Orders Count'          => 'تعداد سفارشات',
+    'Create Size Order for' => 'ثبت سایزهای سفارش',
+    'Value'                 => 'مقدار',
+    'Order ID'              => 'شماره سفارش',
 ];

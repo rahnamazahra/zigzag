@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\Measurment;
+use App\Models\Measurement;
 use App\Models\Order;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -11,8 +11,8 @@ return new class extends Migration {
     {
         Schema::create('sizes', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(Order::Class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Measurment::Class)->constrained();
+            $table->foreignIdFor(Order::class)->constrained();
+            $table->foreignId('measurement_id')->constrained('measurements')->onDelete('cascade');
             $table->string('value');
             $table->softDeletes();
             $table->timestamps();
