@@ -1,27 +1,23 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LocalSetController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('lang/{locale}', function ($locale) {
-    if (!in_array($locale, ['en', 'fa'])) {
-        abort(400);
-    }
-    App::setLocale($locale);
-    return redirect()->back();
-})->name('setLocale');
+Route::get('locale/{lang}', [LocalSetController::class, 'setLocale'])->name('setLocale');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-   Route::resource('/customers', CustomerController::class);
+    Route::get('/dashboard', DashboardController::class)->name('dashboard');
+    Route::resource('/customers', CustomerController::class);
+    Route::resource('/orders', OrderController::class)->except('create');
+    Route::get('/orders/customers/{customer}', [OrderController::class, 'create'])->name('orders.create');
 });
 
 Route::middleware('auth')->group(function () {

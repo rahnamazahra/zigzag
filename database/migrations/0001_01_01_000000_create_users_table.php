@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->id();
             $table->string('name');
             $table->string('mobile')->unique();
+            $table->foreignId('tailor_id')->nullable()->constrained('users');
             $table->string('national_code')->nullable();
             $table->string('postal_code')->nullable();
             $table->text('address')->nullable();

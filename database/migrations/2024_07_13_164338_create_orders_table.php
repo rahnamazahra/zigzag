@@ -14,12 +14,12 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(User::class)->constrained()->cascadeOnDelete();
+            $table->foreignId('tailor_id')->constrained('users')->cascadeOnDelete();
+            $table->foreignId('customer_id')->constrained('users')->cascadeOnDelete();
             $table->foreignIdFor(Category::class)->constrained();
-            $table->foreignIdFor(Cloth::class)->constrained();
-            $table->unsignedBigInteger('total_price');
+            $table->foreignIdFor(Cloth::class)->constrained('clothes');
+            $table->unsignedBigInteger('price');
             $table->integer('quantity')->default(1);
-            $table->unsignedBigInteger('discount')->default(0);
             $table->unsignedTinyInteger('status')->default(OrderStatus::default());
             $table->text('description')->nullable();
             $table->timestamps();

@@ -12,9 +12,9 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="mb-6 text-gray-900">
-                        {{ __('messages.Create New Customer') }}
+                        {{ __('messages.Create New  Customer') }}
                     </div>
-                    <form method="POST" action="{{ route('customers.store') }}">
+                    <form method="POST" action="{{ route('customers.update') }}">
                         @csrf
 
                         <!-- Name -->
@@ -34,9 +34,33 @@
                             <x-input-error :messages="$errors->get('mobile')" class="mt-2"/>
                         </div>
 
+
+                        <!-- Password -->
+                        <div class="mt-4">
+                            <x-input-label for="password" :value="__('messages.Password')"/>
+
+                            <x-text-input id="password" class="block mt-1 w-full"
+                                          type="password"
+                                          name="password"
+                                          required autocomplete="new-password"/>
+
+                            <x-input-error :messages="$errors->get('password')" class="mt-2"/>
+                        </div>
+
+                        <!-- Confirm Password -->
+                        <div class="mt-4">
+                            <x-input-label for="password_confirmation" :value="__('messages.Confirm Password')"/>
+
+                            <x-text-input id="password_confirmation" class="block mt-1 w-full"
+                                          type="password"
+                                          name="password_confirmation" required autocomplete="new-password"/>
+
+                            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2"/>
+                        </div>
+
                         <div class="flex items-center justify-end mt-4">
                             <x-primary-button class="ms-4">
-                                {{ __('messages.Save') }}
+                                {{ __('messages.Register') }}
                             </x-primary-button>
                         </div>
                     </form>

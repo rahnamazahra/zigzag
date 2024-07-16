@@ -4,7 +4,6 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Khayat.ir') }}
             </h2>
-            <x-btn-link class="ml-4" :href="route('customers.create')">{{ __('messages.New Customer') }}</x-btn-link>
         </div>
     </x-slot>
 
@@ -12,29 +11,33 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    {{ __('messages.Customers') }}
+                    {{ __('messages.Orders') }}
                     <table class="mt-6 table">
                         <thead>
                         <tr>
                             <th>{{ __('messages.Id') }}</th>
                             <th>{{ __('messages.Name') }}</th>
                             <th>{{ __('messages.Mobile') }}</th>
+                            <th>{{ __('messages.Status') }}</th>
+                            <th>{{ __('messages.Created_at') }}</th>
                             <th>{{ __('messages.Actions') }}</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach ($customers as $customer)
+                        @foreach ($orders as $order)
                             <tr>
-                                <td>{{$customer->id}}</td>
-                                <td>{{ $customer->name }}</td>
-                                <td>{{ $customer->mobile }}</td>
+                                <td>{{ $order->id }}</td>
+                                <td>{{ $order->customer->name }}</td>
+                                <td>{{ $order->customer->mobile }}</td>
+                                <td>{{ $order->status->label() }}</td>
+                                <td>{{  $order->created_at }}</td>
                                 <td>
                                     <x-btn-link class="ml-4"
-                                                :href="route('orders.create', ['customer' => $customer->id])">{{ __('messages.New Order') }}</x-btn-link>
+                                                :href="route('orders.destroy', ['order' => $order->id])">{{ __('messages.Detail') }}</x-btn-link>
                                     <x-btn-link class="ml-4"
-                                                :href="route('customers.edit', ['customer' => $customer->id])">{{ __('messages.Edit') }}</x-btn-link>
+                                                :href="route('orders.edit', ['order' => $order->id])">{{ __('messages.Edit') }}</x-btn-link>
                                     <x-btn-link class="ml-4"
-                                                :href="route('customers.destroy', ['customer' => $customer->id])">{{ __('messages.Delete') }}</x-btn-link>
+                                                :href="route('orders.destroy', ['order' => $order->id])">{{ __('messages.Delete') }}</x-btn-link>
                                 </td>
                             </tr>
                         @endforeach
