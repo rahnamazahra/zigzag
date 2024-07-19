@@ -1,0 +1,44 @@
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('../fonts/IRANSansWeb.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    font-family: 'MyCustomFont', sans-serif;
+    direction: rtl;
+}
+
+.content {
+    flex: 1;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+th {
+    background-color: #f2f2f2;
+}
+.nav-link {
+    margin-left: 80px; /* Default for LTR */
+}

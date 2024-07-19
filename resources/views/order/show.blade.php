@@ -12,12 +12,14 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="card-body">
-                        <h5 class="card-title">{{ $order->customer->name }}</h5>
-                        <p class="card-text rtl">
-                            <strong>{{__('messages.Mobile')}}:</strong> {{ $order->customer->mobile }}<br>
-                            <strong>{{__('messages.Order ID')}}:</strong> {{ $order->id }}<br>
-                            <strong>{{__('messages.Status')}}:</strong> {{ $order->status->label() }}<br>
-                            <strong>{{__('messages.Created_at')}}:</strong> {{ $order->created_at->format('Y-m-d H:i') }}
+                        <div class="mb-8">
+                            <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{__('messages.Order ID')}}: {{ $order->id }}</h2>
+                        </div>
+                        <h5 class="font-semibold  text-gray-600 leading-tight">{{ $order->customer->name }}</h5>
+                        <p class="card-text rtl pl-4 grid grid-cols-3 gap-2 text-center">
+                            <span><strong>{{__('messages.Mobile')}}:</strong> {{ $order->customer->mobile }}</span>
+                            <span><strong>{{__('messages.Status')}}:</strong> {{ $order->status->label() }}</span>
+                            <span><strong>{{__('messages.Created_at')}}:</strong> {{ $order->created_at->format('Y-m-d H:i') }}</span>
                         </p>
                     </div>
 

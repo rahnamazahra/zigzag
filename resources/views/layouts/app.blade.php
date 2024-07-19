@@ -14,25 +14,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-        <style>
-            body {
-                direction: rtl;
-            }
-            table {
-                width: 100%;
-                border-collapse: collapse;
-            }
-            th, td {
-                border: 1px solid #ddd;
-                padding: 8px;
-            }
-            th {
-                background-color: #f2f2f2;
-            }
-            .nav-link {
-                margin-left: 80px; /* Default for LTR */
-            }
-        </style>
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </head>
     <body class="font-sans antialiased">
         <div class="min-h-screen bg-gray-100">
@@ -52,5 +34,30 @@
                 {{ $slot }}
             </main>
         </div>
+        <!-- Bottom Navigation Bar -->
+        <footer class="footer bg-white shadow-lg border-t border-gray-200 sm:hidden fixed bottom-0 left-0 right-0">
+            <div class="flex justify-between p-2">
+                <a href="{{ route('dashboard') }}" class="flex flex-col items-center text-gray-600 hover:text-gray-800 px-4">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10c0 1.105.895 2 2 2h3.586c.265 0 .52-.105.707-.293L12 15.586l2.707 2.707c.187.188.442.293.707.293H19c1.105 0 2-.895 2-2V7H3z" />
+                    </svg>
+                    <span class="text-xs">{{ __('messages.Dashboard') }}</span>
+                </a>
+
+                <a href="{{ route('customers.index') }}" class="flex flex-col items-center text-gray-600 hover:text-gray-800">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9.99 9.99 0 00-9-9H9a9.99 9.99 0 00-9 9v3.06a9.99 9.99 0 0011 11v-3.06a9.99 0 0011-11V12z" />
+                    </svg>
+                    <span class="text-xs">{{ __('messages.Customers') }}</span>
+                </a>
+
+                <a href="{{ route('orders.index') }}" class="flex flex-col items-center text-gray-600 hover:text-gray-800 px-4">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3v18h18V3H3zm12 14H9v-2h6v2zm-6-4h6v-2H9v2zm0-4h6V7H9v2z" />
+                    </svg>
+                    <span class="text-xs">{{ __('messages.Orders') }}</span>
+                </a>
+            </div>
+        </footer>
     </body>
 </html>

@@ -7,7 +7,7 @@ return [
     'Name'                  => 'نام',
     'Mobile'                => 'موبایل',
     'Password'              => 'رمزعبور',
-    'Forgot your password?' => 'رمز هبور را فراموش کرده اید؟',
+    'Forgot your password?' => 'رمز عبور را فراموش کرده اید؟',
     'Remember me'           => 'مرا بخاطر بسپار',
     'Log in'                => 'ورود',
     'Confirm Password'      => 'تکرار رمزعبور',
@@ -37,4 +37,6 @@ return [
     'Create Size Order for' => 'ثبت سایزهای سفارش',
     'Value'                 => 'مقدار',
     'Order ID'              => 'شماره سفارش',
+    'Profile'               => 'پروفایل',
+    'Log Out'               => 'خروج',
 ];

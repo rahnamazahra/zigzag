@@ -31,13 +31,16 @@
                                 <td>{{ $order->customer->mobile }}</td>
                                 <td>{{ $order->status->label() }}</td>
                                 <td>{{  $order->created_at }}</td>
-                                <td>
-                                    <x-btn-link class="ml-4"
-                                                :href="route('orders.show', ['order' => $order])">{{ __('messages.Detail') }}</x-btn-link>
-                                    <x-btn-link class="ml-4"
-                                                :href="route('orders.edit', ['order' => $order])">{{ __('messages.Edit') }}</x-btn-link>
-                                    <x-btn-link class="ml-4"
-                                                :href="route('orders.destroy', ['order' => $order])">{{ __('messages.Delete') }}</x-btn-link>
+                                <td class="flex space-x-4 justify-center items-center">
+                                    <a href="{{ route('orders.show', ['order' => $order]) }}" class="text-blue-500 hover:text-blue-700">
+                                        <i class="fas fa-info-circle fa-lg"></i>
+                                    </a>
+                                    <a href="{{ route('orders.edit', ['order' => $order]) }}" class="text-yellow-500 hover:text-yellow-700">
+                                        <i class="fas fa-edit fa-lg"></i>
+                                    </a>
+                                    <a href="{{ route('orders.destroy', ['order' => $order]) }}" class="text-red-500 hover:text-red-700">
+                                        <i class="fas fa-trash fa-lg"></i>
+                                    </a>
                                 </td>
                             </tr>
                         @endforeach
