@@ -30,7 +30,7 @@ class SizeController extends Controller
             ]);
         }
 
-        return redirect()->route('customers.index');
+        return redirect()->route('orders.show', ['order' => $order]);
     }
 
     public function create(Order $order): Factory|View|Application

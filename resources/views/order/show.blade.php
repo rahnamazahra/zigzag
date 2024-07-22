@@ -4,6 +4,7 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Khayat.ir') }}
             </h2>
+            <a href="{{ route('orders.index') }}"> {{__('messages.Back')}} </a>
         </div>
     </x-slot>
 
@@ -13,30 +14,38 @@
                 <div class="p-6 text-gray-900">
                     <div class="card-body">
                         <div class="mb-8">
-                            <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{__('messages.Order ID')}}: {{ $order->id }}</h2>
+                            <h2 class="font-semibold text-xl text-gray-800 leading-tight">{{__('messages.Order ID')}}: {{ $order->id }} </h2>
                         </div>
-                        <h5 class="font-semibold  text-gray-600 leading-tight">{{ $order->customer->name }}</h5>
-                        <p class="card-text rtl pl-4 grid grid-cols-3 gap-2 text-center">
-                            <span><strong>{{__('messages.Mobile')}}:</strong> {{ $order->customer->mobile }}</span>
-                            <span><strong>{{__('messages.Status')}}:</strong> {{ $order->status->label() }}</span>
-                            <span><strong>{{__('messages.Created_at')}}:</strong> {{ $order->created_at->format('Y-m-d H:i') }}</span>
+
+                        <p class="card-text rtl pl-4">
+                            <span><strong> {{ $order->customer->name }} </strong></span><br>
+                            <span><strong> {{__('messages.Mobile')}}: </strong> {{ $order->customer->mobile }} </span><br>
+                            <span><strong> {{__('messages.Status')}}: </strong> {{ $order->status->label() }} </span><br>
+                            <span><strong> {{__('messages.Created_at')}}: </strong> {{ $order->created_at->format('Y-m-d H:i') }} </span><br>
+                        </p>
+
+                        <p class="card-text rtl pl-4">
+                            <span><strong> {{__('messages.National_code')}}: </strong> {{ $order->customer->national_code ?? '-' }} </span><br>
+                            <span><strong> {{__('messages.Postal_code')}}: </strong> {{ $order->customer->postal_code ?? '-' }} </span><br>
+                            <span><strong> {{__('messages.Address')}}: </strong> {{ $order->customer->address ?? '-' }} </span><br>
+
                         </p>
                     </div>
 
                     <table class="mt-6 table">
                         <thead>
                         <tr>
-                            <th>{{ __('messages.Id') }}</th>
-                            <th>{{ __('messages.Cloth') }}</th>
-                            <th>{{ __('messages.Value') }}</th>
+                            <th> {{ __('messages.Id') }} </th>
+                            <th> {{ __('messages.Cloth') }} </th>
+                            <th> {{ __('messages.Value') }} </th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach ($sizes as $size)
                             <tr>
-                                <td>{{ $size->id }}</td>
-                                <td>{{ $size->measurement->title }}</td>
-                                <td>{{ $size->value }}</td>
+                                <td> {{ $size->id }} </td>
+                                <td> {{ $size->measurement->title }} </td>
+                                <td> {{ $size->value }} </td>
                             </tr>
                         @endforeach
                         </tbody>

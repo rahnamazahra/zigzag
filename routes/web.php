@@ -4,6 +4,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LocalSetController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SizeController;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +22,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/orders/customers/{customer}', [OrderController::class, 'create'])->name('orders.create');
     Route::resource('/sizes', SizeController::class)->except('create');
     Route::get('/sizes/orders/{order}', [SizeController::class, 'create'])->name('sizes.create');
-
+    Route::resource('/payments', SizeController::class)->except('index','create');
+    Route::get('/payments/orders/{order}', [PaymentController::class, 'index'])->name('payments.index');
 });
 
 Route::middleware('auth')->group(function () {

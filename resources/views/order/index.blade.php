@@ -19,8 +19,6 @@
                             <th>{{ __('messages.Id') }}</th>
                             <th>{{ __('messages.Name') }}</th>
                             <th>{{ __('messages.Mobile') }}</th>
-                            <th>{{ __('messages.Status') }}</th>
-                            <th>{{ __('messages.Created_at') }}</th>
                             <th>{{ __('messages.Actions') }}</th>
                         </tr>
                         </thead>
@@ -30,8 +28,6 @@
                                 <td>{{ $order->id }}</td>
                                 <td>{{ $order->customer->name }}</td>
                                 <td>{{ $order->customer->mobile }}</td>
-                                <td>{{ $order->status->label() }}</td>
-                                <td>{{  $order->created_at }}</td>
                                 <td colspan="3" class="grid grid-cols-3 gap-2">
                                     <a href="{{ route('orders.destroy', ['order' => $order->id]) }}"
                                        class="btn btn-success">
@@ -54,7 +50,9 @@
                                             <path d="M5.5 5.5A.5.5 0 0 1 6 5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5zm3-2.5A1.5 1.5 0 0 0 7 4h2a1.5 1.5 0 0 0 1.5-1.5V2h-5v.5z"/>
                                             <path fill-rule="evenodd"
                                                   d="M4.5 3.5V3h7v.5a1.5 1.5 0 0 0 1 1.415V14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4.915a1.5 1.5 0 0 0 1-1.415zM5 4v10h6V4H5zm2.5-2h1V2h-1v.5z"/>
+                                        </svg>
                                     </a>
+                                    <x-btn-link class="ml-4" :href="route('payments.index',['order' => $order->id])">{{ __('messages.Payments') }}</x-btn-link>
                                 </td>
                             </tr>
                         @endforeach

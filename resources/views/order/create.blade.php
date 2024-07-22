@@ -11,10 +11,11 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-                    <div class="mb-6 text-gray-900">
-                        {{ __('messages.Create Order for') }} {{ $customer->name }}
+                    <div class="mb-8">
+                        <h2 class="font-semibold text-xl text-gray-800 leading-tight"> {{ __('messages.Create Order for') }} {{ $customer->name }}</h2>
                     </div>
-                    <form method="POST" action="{{ route('orders.store') }}">
+
+                    <form method="POST" action="{{ route('orders.store') }}" class="mt-8">
                         @csrf
 
                         <input type="hidden" name="customer_id" value="{{ $customer->id }}">
@@ -22,13 +23,13 @@
                         <!-- cloth -->
                         <div>
                             <x-input-label for="cloth_id" :value="__('messages.Cloth')"/>
-                            <x-select-input :options="$clothes" name="cloth_id" placeholder="{{__('messages.Select Item')}}" />
+                            <x-select-input :options="$clothes" name="cloth_id" class="block mt-1 w-full" placeholder="{{__('messages.Select Item')}}" />
                         </div>
 
                         <!-- category -->
                         <div>
                             <x-input-label for="category_id" :value="__('messages.Category')"/>
-                            <x-select-input :options="$categories" name="category_id" placeholder="{{__('messages.Select Item')}}" />
+                            <x-select-input :options="$categories" name="category_id" class="block mt-1 w-full" placeholder="{{__('messages.Select Item')}}" />
                         </div>
 
                         <!-- quantity -->

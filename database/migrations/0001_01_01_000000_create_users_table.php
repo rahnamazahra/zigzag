@@ -18,6 +18,7 @@ return new class extends Migration {
             $table->string('national_code')->nullable();
             $table->string('postal_code')->nullable();
             $table->text('address')->nullable();
+            $table->text('location')->nullable();
             $table->timestamp('mobile_verified_at')->nullable();
             $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();

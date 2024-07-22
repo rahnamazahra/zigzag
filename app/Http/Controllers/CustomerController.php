@@ -9,6 +9,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Arr;
 use Spatie\Permission\Models\Role;
 
 class CustomerController extends Controller
@@ -24,12 +25,11 @@ class CustomerController extends Controller
     public function store(StoreCustomerRequest $request)
     {
         $validated = $request->validated();
+        $validated = Arr::except($validated, 'tailor_id');
 
-        $customer = User::create([
-            'name'      => $validated['name'],
-            'mobile'    => $validated['mobile'],
-            'tailor_id' => auth()->id(),
-        ]);
+        $customer = User::make($validated);
+        $customer->tailor_id = auth()->id();
+        $customer->save();
 
         //TODO: event
         $role = Role::firstWhere('name', 'customer');

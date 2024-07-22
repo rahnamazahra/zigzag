@@ -39,4 +39,13 @@ return [
     'Order ID'              => 'شماره سفارش',
     'Profile'               => 'پروفایل',
     'Log Out'               => 'خروج',
+    'Back'                  => 'صفحه قبلی ->',
+    'National_code'         => 'کدملی',
+    'Postal_code'           => 'کدپستی',
+    'Address'               => 'آدرس',
+    'Location'              => 'لوکیشن',
+    'Payments'              => 'پرداختی ها',
+    'creditor'              => 'بستانکار',
+    'debtor'                => 'بدهکار',
+    'New payment'           => 'پرداختی جدید',
 ];

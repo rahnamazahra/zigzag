@@ -15,13 +15,13 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 
-class OrderController extends Controller
+class PaymentController extends Controller
 {
-    public function index(): Factory|View|Application
+    public function index(Order $order): Factory|View|Application
     {
-        $orders = Order::query()->where('tailor_id', auth()->id())->orderBy('id', 'desc')->paginate(20);
+        $payments   = Payment::query()->where('order_id', $order->id)->orderBy('id', 'desc')->paginate(20);
 
-        return view('order.index', compact('orders'));
+        return view('payment.index', compact('payments'));
     }
 
     public function store(StoreOrderRequest $request): RedirectResponse
@@ -40,12 +40,9 @@ class OrderController extends Controller
         return redirect()->route('sizes.create', ['order' => $order->id]);
     }
 
-    public function create(User $customer): Factory|View|Application
+    public function create(Order $order): Factory|View|Application
     {
-        $clothes    = Cloth::all()->pluck('name', 'id')->toArray();
-        $categories = Category::all()->pluck('name', 'id')->toArray();
-
-        return view('order.create', compact('customer', 'clothes', 'categories'));
+        //
     }
 
     public function show(Order $order): Factory|View|Application
