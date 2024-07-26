@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\PaymentType;
+use App\Enums\TransactionType;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,8 +15,14 @@ class Payment extends Model
     protected $fillable = [
         'order_id',
         'amount',
-        'type',
+        'transaction_type',
+        'payment_type',
         'balance',
+    ];
+
+    protected $casts = [
+        'transaction_type' => TransactionType::class,
+        'payment_type'     => PaymentType::class,
     ];
 
     public function order(): BelongsTo

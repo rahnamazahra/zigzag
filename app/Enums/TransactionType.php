@@ -2,11 +2,10 @@
 
 namespace App\Enums;
 
-enum PaymentType: int
+enum TransactionType: int
 {
-    case POS = 1;
-    case CART = 2;
-    case CASH = 3;
+    case DEPOSIT = 1;
+    case WITHDRAW = -1;
 
     public static function getValues(): array
     {
@@ -21,9 +20,8 @@ enum PaymentType: int
     public static function labels(): array
     {
         return [
-            self::POS->value => 'POS',
-            self::CART->value => 'کارت به کارت',
-            self::CASH->value => 'نقد',
+            self::DEPOSIT->value => 'واریز',
+            self::WITHDRAW->value => 'بدهکار',
         ];
     }
 

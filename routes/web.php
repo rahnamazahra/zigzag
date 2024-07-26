@@ -22,8 +22,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/orders/customers/{customer}', [OrderController::class, 'create'])->name('orders.create');
     Route::resource('/sizes', SizeController::class)->except('create');
     Route::get('/sizes/orders/{order}', [SizeController::class, 'create'])->name('sizes.create');
-    Route::resource('/payments', SizeController::class)->except('index','create');
-    Route::get('/payments/orders/{order}', [PaymentController::class, 'index'])->name('payments.index');
+    Route::get('/payments', [PaymentController::class, 'index'])->name('payments.index');
+    Route::get('/payments/orders/{order}/create', [PaymentController::class, 'create'])->name('payments.create');
+    Route::get('/payments/orders/{order}', [PaymentController::class, 'show'])->name('payments.show');
+    Route::post('/payments', [PaymentController::class, 'store'])->name('payments.store');
 });
 
 Route::middleware('auth')->group(function () {

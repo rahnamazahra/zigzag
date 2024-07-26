@@ -4,7 +4,7 @@
             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
                 {{ __('Khayat.ir') }}
             </h2>
-            <a href="{{ route('orders.index') }}"> {{__('messages.Back')}} </a>
+            <x-btn-link class="ml-4" :href="route('payments.show', ['order' => $order->id])">{{ __('messages.Payments') }}</x-btn-link>
         </div>
     </x-slot>
 

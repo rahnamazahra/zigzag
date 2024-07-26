@@ -44,8 +44,15 @@
                         <div>
                             <x-input-label for="price" :value="__('messages.Price')"/>
                             <x-text-input id="price" class="block mt-1 w-full" type="text" name="price"
-                                          :value="old('price')" required/>
+                                          :value="old('price')" />
                             <x-input-error :messages="$errors->get('price')" class="mt-2"/>
+                        </div>
+
+                        <!-- description -->
+                        <div>
+                            <x-input-label for="description" :value="__('messages.Description')"/>
+                            <x-text-area-input id="description" class="block mt-1 w-full" name="description">{{ old('description') }}</x-text-area-input>
+                            <x-input-error :messages="$errors->get('description')" class="mt-2"/>
                         </div>
 
                         <div class="flex items-center justify-end mt-4">

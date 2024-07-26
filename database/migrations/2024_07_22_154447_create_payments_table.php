@@ -13,8 +13,9 @@ return new class extends Migration
             $table->id();
             $table->foreignIdFor(Order::class)->constrained();
             $table->unsignedBigInteger('amount');
-            $table->TinyInteger('type');
-            $table->unsignedBigInteger('balance')->nullable();
+            $table->TinyInteger('transaction_type');
+            $table->TinyInteger('payment_type')->nullable();
+            $table->unsignedBigInteger('balance')->nullable()->default(0);
             $table->timestamps();
         });
     }

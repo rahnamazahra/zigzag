@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreSizeRequest extends FormRequest
+class StorePaymengtRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,9 +23,10 @@ class StoreSizeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'order_id'      => ['required'],
-            'measurement'   => ['required', 'array'],
-            'measurement.*' => ['nullable'],
+            'order_id'         => ['required'],
+            'amount'           => ['required'],
+            'transaction_type' => ['required'],
+            'payment_type'     => ['nullable'],
         ];
     }
 }
