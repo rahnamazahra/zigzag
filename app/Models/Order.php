@@ -36,11 +36,16 @@ class Order extends Model
 
     public function sizes(): HasMany
     {
-        return $this->hasMany(Size::class, 'id', 'order_id');
+        return $this->hasMany(Size::class);
     }
 
     public function payments(): HasMany
     {
         return $this->hasMany(Payment::class);
+    }
+
+    public function cloth(): BelongsTo
+    {
+        return $this->belongsTo(Cloth::class, 'cloth_id');
     }
 }

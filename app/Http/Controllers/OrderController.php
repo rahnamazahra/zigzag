@@ -74,14 +74,14 @@ class OrderController extends Controller
 
     public function update(UpdateOrderRequest $request, Order $order): RedirectResponse
     {
+        $originalClothId = $order->cloth_id;
 
         $validated = $request->validated();
         $order->update($validated);
 
-        if ($order->isDirty('cloth_id')) {
-            return redirect()->route('sizes.edit', ['order' => $order]);
-        }
-        else {
+        if ($originalClothId != $order->cloth_id) {
+            return redirect()->route('sizes.edit', ['order' => $order->id]);
+        } else {
             return redirect()->route('orders.index');
         }
     }

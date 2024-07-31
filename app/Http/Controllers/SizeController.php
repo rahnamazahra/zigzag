@@ -50,24 +50,20 @@ class SizeController extends Controller
         //
     }
 
-    public function edit(Size $size): Factory|View|Application
+    public function edit(Order $order): Factory|View|Application
     {
-        $order        = Order::find($size->order_id);
         $cloth        = $order->clothingType;
         $measurements = $cloth->measurements()->get();
 
-        return view('size.edit', compact('measurements', 'order', 'size'));
+        return view('size.edit', compact('measurements', 'order'));
     }
 
-    public function update(UpdateSizeRequest $request, Size $size): RedirectResponse
+    public function update(UpdateSizeRequest $request, Order $order): RedirectResponse
     {
         $validated    = $request->validated();
-        $order        = Order::find($size->order->id);
         $measurements = $validated['measurement'];
+        $order->sizes()->delete();
 
-        foreach ($order->sizes as $size) {
-            $size->destroy($size->id);
-        }
         foreach ($measurements as $key => $value) {
             if ($value !== null) {
                 $order->sizes()->create([

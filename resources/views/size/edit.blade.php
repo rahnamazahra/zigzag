@@ -14,7 +14,7 @@
                     <div class="mb-6 text-gray-900">
                         {{ __('messages.Edit') }} {{ $order->id }} - {{ $order->customer->name }}
                     </div>
-                    <form method="POST" action="{{ route('sizes.update', ['size' => $size]) }}">
+                    <form method="POST" action="{{ route('sizes.update', ['order' => $order->id]) }}">
                         @csrf
                         @method('PUT')
                         @foreach($measurements as $measurement)

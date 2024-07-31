@@ -14,7 +14,7 @@
                     <div class="card-body">
                         <div class="mb-8">
                             <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                                {{__('messages.Order ID')}}: {{ $order->id }}
+                                {{__('messages.Order ID')}}: {{ $order->id }} - {{ $order->cloth->name }}
                             </h2>
                         </div>
 
