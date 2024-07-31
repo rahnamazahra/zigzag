@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSizeRequest;
+use App\Http\Requests\UpdateSizeRequest;
 use App\Models\Order;
+use App\Models\Size;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -23,14 +25,16 @@ class SizeController extends Controller
         $measurements = $validated['measurement'];
 
         foreach ($measurements as $key => $value) {
-            $order->size()->create([
-                'order_id'       => $validated['order_id'],
-                'measurement_id' => $key,
-                'value'          => $value,
-            ]);
+            if ($value !== null) {
+                $order->sizes()->create([
+                    'order_id'       => $validated['order_id'],
+                    'measurement_id' => $key,
+                    'value'          => $value,
+                ]);
+            }
         }
 
-        return redirect()->route('payments.create', ['order' => $order]);
+        return redirect()->route('orders.index');
     }
 
     public function create(Order $order): Factory|View|Application
@@ -43,19 +47,42 @@ class SizeController extends Controller
 
     public function show()
     {
-    }
-
-    public function edit()
-    {
         //
     }
 
-    public function update()
+    public function edit(Size $size): Factory|View|Application
     {
-        //
+        $order        = Order::find($size->order_id);
+        $cloth        = $order->clothingType;
+        $measurements = $cloth->measurements()->get();
+
+        return view('size.edit', compact('measurements', 'order', 'size'));
+    }
+
+    public function update(UpdateSizeRequest $request, Size $size): RedirectResponse
+    {
+        $validated    = $request->validated();
+        $order        = Order::find($size->order->id);
+        $measurements = $validated['measurement'];
+
+        foreach ($order->sizes as $size) {
+            $size->destroy($size->id);
+        }
+        foreach ($measurements as $key => $value) {
+            if ($value !== null) {
+                $order->sizes()->create([
+                    'order_id'       => $order->id,
+                    'measurement_id' => $key,
+                    'value'          => $value,
+                ]);
+            }
+        }
+
+        return redirect()->route('orders.index');
     }
 
     public function destroy()
-    {//
+    {
+        //
     }
 }

@@ -1,3 +1,5 @@
+@php use App\Enums\TransactionType; @endphp
+@php use App\Enums\PaymentType; @endphp
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
@@ -29,12 +31,25 @@
                                 <td> {{ $payment->id }} </td>
                                 <td> {{ $payment->order_id }} </td>
                                 <td> {{ $payment->amount }} </td>
-                                <td> {{ \App\Enums\TransactionType::labels()[$payment->transaction_type->value] }} </td>
-                                <td> {{ \App\Enums\PaymentType::labels()[$payment->payment_type->value] }} </td>
+                                <td> {{ TransactionType::labels()[$payment->transaction_type->value] }} </td>
+                                <td> {{ $payment->payment_type ? PaymentType::labels()[$payment->payment_type->value] : '-' }} </td>
                             </tr>
                         @endforeach
+                        <tr>
+                            <td colspan="5">
+                                <h3 class="font-semibold text-xl text-gray-600 leading-tight">
+                                    {{ number_format($balance * -1) . ' تومان بدهکاری تا کنون ' }}
+                                    -
+                                    {{ number_format($deposit). ' تومان واریزی تا کنون ' }}
+                                </h3>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
+                    <!-- Pagination Links -->
+                    <div class="mt-4">
+                        {{ $payments->links() }}
+                    </div>
                 </div>
             </div>
         </div>

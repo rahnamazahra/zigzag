@@ -17,7 +17,7 @@ class CustomerController extends Controller
     public function index(
     ): Factory|View|Application
     {
-        $customers = User::query()->where('tailor_id', auth()->id())->orderBy('id', 'desc')->paginate(20);
+        $customers = User::query()->where('tailor_id', auth()->id())->orderBy('id', 'desc')->paginate(10);
 
         return view('customer.index', compact('customers'));
     }
@@ -49,19 +49,15 @@ class CustomerController extends Controller
         //
     }
 
-    public function edit(User $user
-    ): Factory|View|Application {
-        return view('customer.edit', compact('user'));
+    public function edit(User $customer): Factory|View|Application {
+        return view('customer.edit', compact('customer'));
     }
 
-    public function update(UpdateCustomerRequest $request, User $user): RedirectResponse
+    public function update(UpdateCustomerRequest $request, User $customer): RedirectResponse
     {
         $validated = $request->validated();
 
-        $user->update([
-            'name'   => $validated['name'],
-            'mobile' => $validated['mobile'],
-        ]);
+        $customer->update($validated);
 
         return redirect()->route('customers.index');
     }

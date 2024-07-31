@@ -12,16 +12,17 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="mb-6 text-gray-900">
-                        {{ __('messages.Create New  Customer') }}
+                        {{ __('messages.Edit') }} {{ $customer->name }}
                     </div>
-                    <form method="POST" action="{{ route('customers.update') }}">
+                    <form method="POST" action="{{ route('customers.update', ['customer' => $customer]) }}" class="mt-8">
                         @csrf
+                        @method('PUT')
 
                         <!-- Name -->
                         <div>
                             <x-input-label for="name" :value="__('messages.Name')"/>
                             <x-text-input id="name" class="block mt-1 w-full" type="text" name="name"
-                                          :value="old('name')"
+                                          :value="old('name', $customer->name)"
                                           required autofocus autocomplete="name"/>
                             <x-input-error :messages="$errors->get('name')" class="mt-2"/>
                         </div>
@@ -30,37 +31,45 @@
                         <div>
                             <x-input-label for="mobile" :value="__('messages.Mobile')"/>
                             <x-text-input id="mobile" class="block mt-1 w-full" type="text" name="mobile"
-                                          :value="old('mobile')" required/>
+                                          :value="old('mobile', $customer->mobile)" required/>
                             <x-input-error :messages="$errors->get('mobile')" class="mt-2"/>
                         </div>
 
-
-                        <!-- Password -->
-                        <div class="mt-4">
-                            <x-input-label for="password" :value="__('messages.Password')"/>
-
-                            <x-text-input id="password" class="block mt-1 w-full"
-                                          type="password"
-                                          name="password"
-                                          required autocomplete="new-password"/>
-
-                            <x-input-error :messages="$errors->get('password')" class="mt-2"/>
+                        <!-- National_code -->
+                        <div>
+                            <x-input-label for="national_code" :value="__('messages.National_code')"/>
+                            <x-text-input id="national_code" class="block mt-1 w-full" type="text" name="national_code"
+                                          :value="old('national_code', $customer->national_code)"/>
+                            <x-input-error :messages="$errors->get('national_code')" class="mt-2"/>
                         </div>
 
-                        <!-- Confirm Password -->
-                        <div class="mt-4">
-                            <x-input-label for="password_confirmation" :value="__('messages.Confirm Password')"/>
-
-                            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                          type="password"
-                                          name="password_confirmation" required autocomplete="new-password"/>
-
-                            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2"/>
+                        <!-- Postal_code -->
+                        <div>
+                            <x-input-label for="postal_code" :value="__('messages.Postal_code')"/>
+                            <x-text-input id="postal_code" class="block mt-1 w-full" type="text" name="postal_code"
+                                          :value="old('postal_code', $customer->postal_code)"/>
+                            <x-input-error :messages="$errors->get('postal_code')" class="mt-2"/>
                         </div>
 
-                        <div class="flex items-center justify-end mt-4">
-                            <x-primary-button class="ms-4">
-                                {{ __('messages.Register') }}
+                        <!-- Address -->
+                        <div>
+                            <x-input-label for="address" :value="__('messages.Address')"/>
+                            <x-text-area-input id="address" class="block mt-1 w-full" name="address">{{ old('address', $customer->address) }}</x-text-area-input>
+                            <x-input-error :messages="$errors->get('address')" class="mt-2"/>
+                        </div>
+
+
+                        <!-- Location -->
+                        <div>
+                            <x-input-label for="location" :value="__('messages.Location')"/>
+                            <x-text-input id="location" class="block mt-1 w-full" type="text" name="location"
+                                          :value="old('location', $customer->location)"/>
+                            <x-input-error :messages="$errors->get('location')" class="mt-2"/>
+                        </div>
+
+                        <div class="mt-4">
+                            <x-primary-button class="ms-4 w-full sm:w-auto btn btn-success">
+                                {{ __('messages.Save') }}
                             </x-primary-button>
                         </div>
                     </form>

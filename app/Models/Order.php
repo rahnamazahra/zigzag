@@ -13,17 +13,18 @@ class Order extends Model
     use HasFactory;
 
     protected $table = 'orders';
-    protected $fillable = ['tailor_id', 'customer_id', 'category_id', 'cloth_id', 'quantity', 'price'];
+    protected $fillable = ['tailor_id', 'customer_id', 'category_id', 'cloth_id', 'quantity', 'price', 'description'];
 
     protected $casts = [
         'status' => OrderStatus::class,
     ];
+
     public function customer(): BelongsTo
     {
         return $this->belongsTo(User::class, 'customer_id');
     }
 
-    public function tailor():BelongsTo
+    public function tailor(): BelongsTo
     {
         return $this->belongsTo(User::class, 'tailor_id');
     }
@@ -33,9 +34,9 @@ class Order extends Model
         return $this->belongsTo(Cloth::class, 'cloth_id');
     }
 
-    public function size(): BelongsTo
+    public function sizes(): HasMany
     {
-        return $this->belongsTo(Size::class);
+        return $this->hasMany(Size::class, 'id', 'order_id');
     }
 
     public function payments(): HasMany

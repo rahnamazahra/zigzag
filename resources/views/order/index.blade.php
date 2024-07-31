@@ -17,7 +17,6 @@
                         <thead>
                         <tr>
                             <th>{{ __('messages.Id') }}</th>
-                            <th>{{ __('messages.Name') }}</th>
                             <th>{{ __('messages.Mobile') }}</th>
                             <th>{{ __('messages.Actions') }}</th>
                         </tr>
@@ -26,17 +25,19 @@
                         @foreach ($orders as $order)
                             <tr>
                                 <td>{{ $order->id }}</td>
-                                <td>{{ $order->customer->name }}</td>
                                 <td>{{ $order->customer->mobile }}</td>
                                 <td class="grid grid-cols-3 gap-2">
-                                    <a href="{{ route('orders.destroy', ['order' => $order->id]) }}" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Details">
+                                    <a href="{{ route('orders.destroy', ['order' => $order]) }}" class="btn btn-success"
+                                       data-bs-toggle="tooltip" data-bs-placement="top" title="Details">
                                         <i class="bi bi-info-circle"></i>
                                     </a>
-                                    <a href="{{ route('orders.edit', ['order' => $order->id]) }}" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Editing">
+                                    <a href="{{ route('orders.edit', ['order' => $order]) }}" class="btn btn-success"
+                                       data-bs-toggle="tooltip" data-bs-placement="top" title="Editing">
                                         <i class="bi bi-pencil"></i>
                                     </a>
-                                    <a href="{{ route('payments.show', ['order' => $order->id]) }}" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Financial Affairs">
-                                        <i class="bi bi-cart"></i>
+                                    <a href="{{ route('payments.show', ['order' => $order]) }}" class="btn btn-success"
+                                       data-bs-toggle="tooltip" data-bs-placement="top" title="Financial Affairs">
+                                        پرداخت
                                     </a>
                                 </td>
                             </tr>

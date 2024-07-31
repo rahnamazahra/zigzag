@@ -29,7 +29,7 @@ class StoreCustomerRequest extends FormRequest
             'national_code' => ['nullable', 'string', 'max:11', 'unique:'.User::class],
             'postal_code'   => ['nullable', 'string', 'max:11', 'unique:'.User::class],
             'address'       => ['nullable', 'string', 'max:255'],
-
+            'location'      => ['nullable', 'string', 'max:255'],
         ];
     }
 }

@@ -7,7 +7,7 @@
         </div>
     </x-slot>
 
-    <div class="py-12 my-12">
+    <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
@@ -38,8 +38,8 @@
                             </div>
                         @endforeach
 
-                        <div class="flex items-center justify-end mt-4">
-                            <x-primary-button class="ms-4">
+                        <div class="mt-4">
+                            <x-primary-button class="ms-4 w-full sm:w-auto btn btn-success">
                                 {{ __('messages.Save') }}
                             </x-primary-button>
                         </div>

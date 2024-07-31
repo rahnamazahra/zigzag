@@ -52,7 +52,10 @@ return [
     'Payment Type'             => 'نوع پرداخت',
     'Transaction Type'         => 'نوع تراکنش',
     'Balance'                  => 'بالانس',
+    'Deposit'                  => 'واریز',
+    'Withdraw'                 => 'بدهکار',
     'Description'              => 'توضیحات',
     'Create Payment for order' => 'وضعیت  پرداخت برای سفارش ',
     'Order Price'              => 'مبلغ قابل پرداخت',
+    'Not determined'           => 'تعیین نشده',
 ];

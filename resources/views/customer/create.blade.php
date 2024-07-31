@@ -66,8 +66,8 @@
                             <x-input-error :messages="$errors->get('location')" class="mt-2"/>
                         </div>
 
-                        <div class="flex items-center justify-end mt-4">
-                            <x-primary-button class="ms-4">
+                        <div class="mt-4">
+                            <x-primary-button class="ms-4 w-full sm:w-auto btn btn-success">
                                 {{ __('messages.Save') }}
                             </x-primary-button>
                         </div>

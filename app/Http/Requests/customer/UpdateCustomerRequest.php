@@ -2,9 +2,9 @@
 
 namespace App\Http\Requests\customer;
 
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
-use Illuminate\Contracts\Validation\ValidationRule;
 
 class UpdateCustomerRequest extends FormRequest
 {
@@ -23,14 +23,15 @@ class UpdateCustomerRequest extends FormRequest
      */
     public function rules(): array
     {
+        $userId = $this->route('customer');
+
         return [
-            'name'   => ['required', 'string', 'max:255'],
-            'mobile' => [
-                'required',
-                'string',
-                'max:11',
-                Rule::unique('users')->ignore($this->user()->id, 'id'),
-                ]
-            ];
+            'name'          => ['required', 'string', 'max:255'],
+            'mobile'        => ['required', 'string', 'max:11', Rule::unique('users')->ignore($userId)],
+            'national_code' => ['nullable', 'string', 'max:11', Rule::unique('users')->ignore($userId)],
+            'postal_code'   => ['nullable', 'string', 'max:11', Rule::unique('users')->ignore($userId)],
+            'address'       => ['nullable', 'string', 'max:255'],
+            'location'      => ['nullable', 'string', 'max:255'],
+        ];
     }
 }

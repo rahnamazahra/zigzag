@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
@@ -23,7 +24,8 @@ class User extends Authenticatable
         'tailor_id',
         'national_code',
         'postal_code',
-        'address'
+        'address',
+        'location'
     ];
 
     use HasFactory, Notifiable, HasRoles;
@@ -66,4 +68,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Order::class, 'tailor_id');
     }
+
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class);
+    }
+
 }

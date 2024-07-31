@@ -22,21 +22,23 @@
 
                         <!-- cloth -->
                         <div>
-                            <x-input-label for="cloth_id" :value="__('messages.Cloth')"/>
-                            <x-select-input :options="$clothes" name="cloth_id" class="block mt-1 w-full" placeholder="{{__('messages.Select Item')}}" />
+                            <x-input-label for="cloth_id" :value="__('messages.Cloth')" :required="true"/>
+                            <x-select-input :options="$clothes" name="cloth_id" class="block mt-1 w-full" placeholder="{{__('messages.Select Item')}}" required />
+                            <x-input-error :messages="$errors->get('cloth_id')" class="mt-2"/>
                         </div>
 
                         <!-- category -->
                         <div>
-                            <x-input-label for="category_id" :value="__('messages.Category')"/>
-                            <x-select-input :options="$categories" name="category_id" class="block mt-1 w-full" placeholder="{{__('messages.Select Item')}}" />
+                            <x-input-label for="category_id" :value="__('messages.Category')" :required="true"/>
+                            <x-select-input :options="$categories" name="category_id" class="block mt-1 w-full" placeholder="{{__('messages.Select Item')}}" required />
+                            <x-input-error :messages="$errors->get('category_id')" class="mt-2"/>
                         </div>
 
                         <!-- quantity -->
                         <div>
                             <x-input-label for="quantity" :value="__('messages.Quantity')"/>
                             <x-text-input id="quantity" class="block mt-1 w-full" type="text" name="quantity"
-                                          :value="old('quantity')"/>
+                                          :value="old('quantity', 1)"/>
                             <x-input-error :messages="$errors->get('quantity')" class="mt-2"/>
                         </div>
 
@@ -44,7 +46,7 @@
                         <div>
                             <x-input-label for="price" :value="__('messages.Price')"/>
                             <x-text-input id="price" class="block mt-1 w-full" type="text" name="price"
-                                          :value="old('price')" />
+                                          :value="old('price', 0)" />
                             <x-input-error :messages="$errors->get('price')" class="mt-2"/>
                         </div>
 
@@ -55,8 +57,8 @@
                             <x-input-error :messages="$errors->get('description')" class="mt-2"/>
                         </div>
 
-                        <div class="flex items-center justify-end mt-4">
-                            <x-primary-button class="ms-4">
+                        <div class="mt-4">
+                            <x-primary-button class="ms-4 w-full sm:w-auto btn btn-success">
                                 {{ __('messages.Save') }}
                             </x-primary-button>
                         </div>

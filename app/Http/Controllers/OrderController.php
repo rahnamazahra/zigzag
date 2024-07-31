@@ -7,6 +7,7 @@ use App\Http\Requests\order\UpdateOrderRequest;
 use App\Models\Category;
 use App\Models\Cloth;
 use App\Models\Order;
+use App\Models\Payment;
 use App\Models\Size;
 use App\Models\User;
 use Illuminate\Contracts\View\Factory;
@@ -34,7 +35,7 @@ class OrderController extends Controller
             'cloth_id'    => $validated['cloth_id'],
             'category_id' => $validated['category_id'],
             'quantity'    => $validated['quantity'],
-            'price'       => $validated['price'],
+            'price'       => $validated['price'] ?? 0,
         ]);
 
         return redirect()->route('sizes.create', ['order' => $order->id]);
@@ -50,25 +51,39 @@ class OrderController extends Controller
 
     public function show(Order $order): Factory|View|Application
     {
-        $sizes = Size::where('order_id', $order->id)->get();
-        return view('order.show', compact('sizes', 'order'));
+        $sizes   = Size::where('order_id', $order->id)->get();
+        $balance = Payment::calculateBalance($order->id);
+        $deposit = Payment::calculateDeposit($order->id);
+
+        return view('order.show', compact('sizes', 'order', 'balance', 'deposit'));
     }
 
-    public function edit(User $user): Factory|View|Application
+    public function edit(Order $order): Factory|View|Application
     {
-        return view('order.edit', compact('user'));
-    }
+        $clothes    = Cloth::all()->pluck('name', 'id')->toArray();
+        $categories = Category::all()->pluck('name', 'id')->toArray();
 
-    public function update(UpdateOrderRequest $request, User $user): RedirectResponse
-    {
-        $validated = $request->validated();
-
-        $user->update([
-            'name'   => $validated['name'],
-            'mobile' => $validated['mobile'],
+        return view('order.edit', [
+            'order'              => $order,
+            'clothes'            => $clothes,
+            'categories'         => $categories,
+            'selectedClothId'    => $order->cloth_id,
+            'selectedCategoryId' => $order->category_id,
         ]);
+    }
 
-        return redirect()->route('orders.index');
+    public function update(UpdateOrderRequest $request, Order $order): RedirectResponse
+    {
+
+        $validated = $request->validated();
+        $order->update($validated);
+
+        if ($order->isDirty('cloth_id')) {
+            return redirect()->route('sizes.edit', ['order' => $order]);
+        }
+        else {
+            return redirect()->route('orders.index');
+        }
     }
 
     public function destroy(Order $order): RedirectResponse

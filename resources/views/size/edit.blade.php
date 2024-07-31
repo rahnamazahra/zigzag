@@ -12,55 +12,33 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <div class="mb-6 text-gray-900">
-                        {{ __('messages.Create New  Customer') }}
+                        {{ __('messages.Edit') }} {{ $order->id }} - {{ $order->customer->name }}
                     </div>
-                    <form method="POST" action="{{ route('customers.update') }}">
+                    <form method="POST" action="{{ route('sizes.update', ['size' => $size]) }}">
                         @csrf
+                        @method('PUT')
+                        @foreach($measurements as $measurement)
+                            <div>
+                                <label for="measurement_{{ $measurement->id }}"> {{ $measurement->title }} </label>
+                                @if($measurement->title !="توضیحات")
+                                    <x-text-input id="measurement_{{ $measurement->id }}"
+                                                  class="block mt-1 w-full"
+                                                  type="text"
+                                                  name="measurement[{{ $measurement->id }}]"
+                                                  :value="old('measurement.' . $measurement->id)"
+                                                  required/>
+                                @else
 
-                        <!-- Name -->
-                        <div>
-                            <x-input-label for="name" :value="__('messages.Name')"/>
-                            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name"
-                                          :value="old('name')"
-                                          required autofocus autocomplete="name"/>
-                            <x-input-error :messages="$errors->get('name')" class="mt-2"/>
-                        </div>
+                                    <x-text-area-input id="measurement_{{ $measurement->id }}" class="block mt-1 w-full"
+                                                       name="measurement[{{ $measurement->id }}]"></x-text-area-input>
 
-                        <!-- Mobile -->
-                        <div>
-                            <x-input-label for="mobile" :value="__('messages.Mobile')"/>
-                            <x-text-input id="mobile" class="block mt-1 w-full" type="text" name="mobile"
-                                          :value="old('mobile')" required/>
-                            <x-input-error :messages="$errors->get('mobile')" class="mt-2"/>
-                        </div>
+                                @endif
+                            </div>
+                        @endforeach
 
-
-                        <!-- Password -->
                         <div class="mt-4">
-                            <x-input-label for="password" :value="__('messages.Password')"/>
-
-                            <x-text-input id="password" class="block mt-1 w-full"
-                                          type="password"
-                                          name="password"
-                                          required autocomplete="new-password"/>
-
-                            <x-input-error :messages="$errors->get('password')" class="mt-2"/>
-                        </div>
-
-                        <!-- Confirm Password -->
-                        <div class="mt-4">
-                            <x-input-label for="password_confirmation" :value="__('messages.Confirm Password')"/>
-
-                            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                          type="password"
-                                          name="password_confirmation" required autocomplete="new-password"/>
-
-                            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2"/>
-                        </div>
-
-                        <div class="flex items-center justify-end mt-4">
-                            <x-primary-button class="ms-4">
-                                {{ __('messages.Register') }}
+                            <x-primary-button class="ms-4 w-full sm:w-auto btn btn-success">
+                                {{ __('messages.Save') }}
                             </x-primary-button>
                         </div>
                     </form>

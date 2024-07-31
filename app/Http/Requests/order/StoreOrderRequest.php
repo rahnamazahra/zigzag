@@ -28,8 +28,9 @@ class StoreOrderRequest extends FormRequest
             'customer_id' => ['required', 'exists:users,id'],
             'category_id' => ['required', 'exists:categories,id'],
             'cloth_id'    => ['required', 'exists:clothes,id'],
-            'price'       => ['required', 'integer', 'min:0'],
+            'price'       => ['nullable', 'integer', 'min:0'],
             'quantity'    => ['nullable', 'integer', 'min:1'],
+            'description' => ['nullable', 'string'],
         ];
     }
 }

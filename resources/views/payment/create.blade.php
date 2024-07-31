@@ -31,17 +31,17 @@
                         <!-- Transaction Type -->
                         <div>
                             <x-input-label for="transaction_type" :value="__('messages.Transaction Type')"/>
-                            <x-select-input :options="$transactionTypes" name="transaction_type" class="block mt-1 w-full" placeholder="{{__('messages.Select Item')}}" />
+                            <x-select-input id="transaction_type" :options="$transactionTypes" name="transaction_type" class="block mt-1 w-full" placeholder="{{__('messages.Select Item')}}" />
                         </div>
 
                         <!-- Payment Type -->
-                        <div>
+                        <div id="payment_type_container">
                             <x-input-label for="payment_type" :value="__('messages.Payment Type')"/>
                             <x-select-input :options="$paymentTypes" name="payment_type" class="block mt-1 w-full" placeholder="{{__('messages.Select Item')}}" />
                         </div>
 
-                        <div class="flex items-center justify-end mt-4">
-                            <x-primary-button class="ms-4">
+                        <div class="mt-4">
+                            <x-primary-button class="ms-4 w-full sm:w-auto btn btn-success">
                                 {{ __('messages.Save') }}
                             </x-primary-button>
                         </div>
@@ -50,4 +50,23 @@
             </div>
         </div>
     </div>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const transactionType = document.getElementById('transaction_type');
+        const paymentTypeContainer = document.getElementById('payment_type_container');
+
+        function togglePaymentType() {
+          if (transactionType.value === '-1') {
+            paymentTypeContainer.style.display = 'none';
+          } else {
+            paymentTypeContainer.style.display = 'block';
+          }
+        }
+
+        transactionType.addEventListener('change', togglePaymentType);
+
+        // Initialize the visibility based on the initial value
+        togglePaymentType();
+      });
+    </script>
 </x-app-layout>

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('customer_id')->constrained('users')->cascadeOnDelete();
             $table->foreignIdFor(Category::class)->constrained();
             $table->foreignIdFor(Cloth::class)->constrained('clothes');
-            $table->unsignedBigInteger('price');
+            $table->unsignedBigInteger('price')->default(0);
             $table->integer('quantity')->default(1);
             $table->unsignedTinyInteger('status')->default(OrderStatus::default());
             $table->text('description')->nullable();
