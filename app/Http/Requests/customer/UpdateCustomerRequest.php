@@ -34,4 +34,15 @@ class UpdateCustomerRequest extends FormRequest
             'location'      => ['nullable', 'string', 'max:255'],
         ];
     }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'mobile'        => convertPersianToEnglishNumbers($this->mobile),
+            'national_code' => convertPersianToEnglishNumbers($this->national_code),
+            'postal_code'   => convertPersianToEnglishNumbers($this->postal_code),
+            'name'          => convertArabicToPersianLetters($this->name),
+            'address'       => convertArabicToPersianLetters($this->address),
+        ]);
+    }
 }

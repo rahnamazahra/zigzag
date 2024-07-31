@@ -1,3 +1,9 @@
+<?php
+
+use Carbon\Carbon;
+use Morilog\Jalali\Jalalian;
+
+?>
 <x-app-layout>
     <x-slot name="header">
         <div class="flex justify-between items-center">
@@ -28,12 +34,17 @@
                                 <span>
                                     <strong> {{__('messages.Deposit')}}: </strong>
                                     {{ $deposit > 0 ? number_format($deposit) : '-' }}
-                                    <x-nav-link class="text-indigo-500 underline" :href="route('payments.show', ['order' => $order->id])">
+                                    <x-nav-link class="text-indigo-500 underline"
+                                                :href="route('payments.show', ['order' => $order->id])">
                                         <strong> {{ 'جزییات پرداخت' }} </strong>
                                     </x-nav-link>
                                 </span><br>
                                 <span><strong> {{__('messages.Withdraw')}}: </strong> {{ $balance < 0 ? number_format($balance * -1) : '-' }} </span><br>
-                                <span><strong> {{__('messages.Created_at')}}: </strong> {{ $order->created_at->format('Y-m-d H:i') }} </span><br>
+                                <?php
+                                $carbonDate = Carbon::parse($order->created_at);
+                                $jalaliDate = Jalalian::fromCarbon($carbonDate);
+                                ?>
+                                <span><strong> {{__('messages.Created_at')}}: </strong> {{ $jalaliDate->format('Y/m/d H:i:s') }} </span><br>
                             </p>
                         </div>
                     </div>

@@ -29,4 +29,11 @@ class StorePaymengtRequest extends FormRequest
             'payment_type'     => ['nullable'],
         ];
     }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'amount' => convertPersianToEnglishNumbers($this->amount),
+        ]);
+    }
 }

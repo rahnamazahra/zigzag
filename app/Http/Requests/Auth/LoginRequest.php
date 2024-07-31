@@ -3,12 +3,12 @@
 namespace App\Http\Requests\Auth;
 
 use Illuminate\Auth\Events\Lockout;
+use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Contracts\Validation\Rule;
 
 class LoginRequest extends FormRequest
 {
@@ -82,5 +82,13 @@ class LoginRequest extends FormRequest
     public function throttleKey(): string
     {
         return Str::transliterate(Str::lower($this->string('mobile')).'|'.$this->ip());
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'mobile'   => convertPersianToEnglishNumbers($this->mobile),
+            'password' => convertPersianToEnglishNumbers($this->password),
+        ]);
     }
 }

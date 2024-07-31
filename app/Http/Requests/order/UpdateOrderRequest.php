@@ -29,4 +29,13 @@ class UpdateOrderRequest extends FormRequest
             'description' => ['nullable', 'string'],
         ];
     }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'price'       => convertPersianToEnglishNumbers($this->order_number),
+            'quantity'    => convertPersianToEnglishNumbers($this->quantity),
+            'description' => convertArabicToPersianLetters($this->description),
+        ]);
+    }
 }

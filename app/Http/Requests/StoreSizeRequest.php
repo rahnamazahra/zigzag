@@ -28,4 +28,17 @@ class StoreSizeRequest extends FormRequest
             'measurement.*' => ['nullable'],
         ];
     }
+
+    protected function prepareForValidation()
+    {
+        $measurements = $this->input('measurement', []);
+
+        foreach ($measurements as $key => $value) {
+            $measurements[$key] = convertPersianToEnglishNumbers($value);
+        }
+
+        $this->merge([
+            'measurement' => $measurements,
+        ]);
+    }
 }

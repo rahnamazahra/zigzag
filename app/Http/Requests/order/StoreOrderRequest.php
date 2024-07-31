@@ -2,10 +2,8 @@
 
 namespace App\Http\Requests\order;
 
-use App\Enums\OrderStatus;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
 class StoreOrderRequest extends FormRequest
 {
@@ -32,5 +30,14 @@ class StoreOrderRequest extends FormRequest
             'quantity'    => ['nullable', 'integer', 'min:1'],
             'description' => ['nullable', 'string'],
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'price'       => convertPersianToEnglishNumbers($this->order_number),
+            'quantity'    => convertPersianToEnglishNumbers($this->quantity),
+            'description' => convertArabicToPersianLetters($this->description),
+        ]);
     }
 }

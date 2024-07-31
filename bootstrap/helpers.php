@@ -1,7 +1,7 @@
 <?php
 
 if (!function_exists('convertPersianToEnglishNumbers')) {
-    function convertPersianToEnglishNumbers($string)
+    function convertPersianToEnglishNumbers($string): array|string
     {
         $persianNumbers = ['۰', '۱', '۲', '۳', '۴', '۵', '۶', '۷', '۸', '۹'];
         $englishNumbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
@@ -11,7 +11,7 @@ if (!function_exists('convertPersianToEnglishNumbers')) {
 }
 
 if (!function_exists('convertArabicToPersianLetters')) {
-    function convertArabicToPersianLetters($string)
+    function convertArabicToPersianLetters($string): array|string
     {
         $arabicLetters  = ['ي', 'ك', 'ة'];
         $persianLetters = ['ی', 'ک', 'ه'];
