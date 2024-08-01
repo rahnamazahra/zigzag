@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 use Illuminate\Validation\ValidationException;
 use Spatie\Permission\Models\Role;
@@ -21,18 +20,14 @@ class RegisteredUserController extends Controller
      *
      * @throws ValidationException
      */
-    public function store(Request $request): RedirectResponse
+    public function store(RegisterRequest $request): RedirectResponse
     {
-        $request->validate([
-            'name'     => ['required', 'string', 'max:255'],
-            'mobile'   => ['required', 'string', 'max:11', 'unique:'.User::class],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
+      $validated = $request->validated();
 
         $user = User::create([
-            'name'     => $request->name,
-            'mobile'   => $request->mobile,
-            'password' => Hash::make($request->password),
+            'name'     => $validated['name'],
+            'mobile'   => $validated['mobile'],
+            'password' => Hash::make($validated['password']),
         ]);
 
         $role = Role::firstWhere('name', 'tailor');

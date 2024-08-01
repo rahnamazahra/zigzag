@@ -18,7 +18,7 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'zigzag') }}</title>
 
     </head>
     <body class="font-sans antialiased">

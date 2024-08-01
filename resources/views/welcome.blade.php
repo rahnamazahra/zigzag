@@ -3,60 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="path/to/your/css/file.css">
-    <title>Your Website</title>
     <style>
-        .container {
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
             display: flex;
-            flex-direction: column;
-            align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            text-align: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
         }
-        .logo {
+
+        .bg-video {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        .content-wrapper {
+            position: relative;
+            text-align: center;
+            color: white;
+            z-index: 2;
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .logo img {
+            width: 100px;
+            height: 100px;
             margin-bottom: 20px;
         }
+
         .nav-links a {
-            margin: 0 10px;
+            display: inline-block;
+            margin: 10px 20px;
             padding: 10px 20px;
-            border: 1px solid transparent;
+            text-decoration: none;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.6);
             border-radius: 5px;
-            transition: color 0.3s, border-color 0.3s;
+            transition: background-color 0.3s;
         }
+
         .nav-links a:hover {
-            color: #FF2D20;
-            border-color: #FF2D20;
+            background-color: rgba(255, 45, 32, 0.8);
         }
     </style>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <title>{{ config('app.name', 'zigzag') }}</title>
 </head>
 <body>
-<div class="bg-gray-50 text-black/50 dark:bg-black dark:text-white/50">
-    <div class="container selection:bg-[#FF2D20] selection:text-white">
-        <div class="logo">
-            <img src="logo.png" alt="Logo" width="50" height="50">
-        </div>
-        <header>
-            @if (Route::has('login'))
-                <nav class="nav-links">
-                    @auth
-                        <a href="{{ url('/dashboard') }}" class="text-black dark:text-white">
-                            @lang('messages.Dashboard')
+<video class="bg-video" autoplay muted loop>
+    <source src="background-video.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+<div class="content-wrapper">
+    <header>
+        @if (Route::has('login'))
+            <nav class="nav-links">
+                @auth
+                    <a href="{{ url('/dashboard') }}" class="text-black dark:text-white">
+                        @lang('messages.Dashboard')
+                    </a>
+                @else
+                    <a href="{{ route('login') }}" class="text-black dark:text-white">
+                        @lang('messages.Log in')
+                    </a>
+                    @if (Route::has('register'))
+                        <a href="{{ route('register') }}" class="text-black dark:text-white">
+                            @lang('messages.Register')
                         </a>
-                    @else
-                        <a href="{{ route('login') }}" class="text-black dark:text-white">
-                            @lang('messages.Log in')
-                        </a>
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="text-black dark:text-white">
-                                @lang('messages.Register')
-                            </a>
-                        @endif
-                    @endauth
-                </nav>
-            @endif
-        </header>
-    </div>
+                    @endif
+                @endauth
+            </nav>
+        @endif
+    </header>
 </div>
 </body>
 </html>
