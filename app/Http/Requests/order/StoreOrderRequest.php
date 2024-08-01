@@ -35,7 +35,7 @@ class StoreOrderRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'price'       => convertPersianToEnglishNumbers($this->order_number),
+            'price'       => convertPersianToEnglishNumbers($this->price),
             'quantity'    => convertPersianToEnglishNumbers($this->quantity),
             'description' => convertArabicToPersianLetters($this->description),
         ]);
