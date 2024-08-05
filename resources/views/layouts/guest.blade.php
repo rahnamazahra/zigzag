@@ -10,11 +10,11 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow: hidden;
             display: flex;
             justify-content: center;
             align-items: center;
             font-family: Arial, sans-serif;
+            overflow: hidden;
         }
 
         .bg-video {
@@ -34,12 +34,12 @@
             text-align: center;
             color: white;
             z-index: 2;
-            backdrop-filter: blur(20px);
             padding: 20px;
             border-radius: 15px;
             background: rgba(0, 0, 0, 0.7);
-            width: 500px;
-            max-width: 800px;
+            width: 90%;
+            max-width: 500px;
+            margin: 0 auto;
         }
 
         .logo img {
@@ -50,16 +50,15 @@
 
         .form-container {
             width: 100%;
-            max-width: 800px;
             margin: 0 auto;
             padding: 20px;
             border-radius: 10px;
-            text-align: right;
+            text-align: left;
         }
 
         .form-container input, .form-container button {
             width: 100%;
-            padding: 10px;
+            padding: 15px;
             margin: 10px 0;
             border-radius: 5px;
             border: none;
@@ -92,27 +91,34 @@
         }
 
         @media (max-width: 768px) {
-            .form-container {
+            .content-wrapper {
                 width: 90%;
+                padding: 20px;
             }
 
             .logo img {
-                width: 80px;
-                height: 80px;
+                width: 40px;
+                height: 40px;
             }
         }
 
         @media (max-width: 480px) {
-            .form-container {
+            .content-wrapper {
                 width: 100%;
-                padding: 10px;
+                padding: 15px;
             }
 
             .logo img {
-                width: 60px;
-                height: 60px;
+                width: 30px;
+                height: 30px;
+            }
+
+            .form-container input, .form-container button {
+                padding: 12px;
+                margin: 8px 0;
             }
         }
+
         .remember-me-container {
             display: flex;
             align-items: center;
@@ -133,6 +139,7 @@
         .flex-end a {
             margin-right: auto;
         }
+
     </style>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">

@@ -28,12 +28,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/payments/orders/{order}/create', [PaymentController::class, 'create'])->name('payments.create');
     Route::get('/payments/orders/{order}', [PaymentController::class, 'show'])->name('payments.show');
     Route::post('/payments', [PaymentController::class, 'store'])->name('payments.store');
-});
-
-Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
 
